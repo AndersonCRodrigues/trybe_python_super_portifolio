@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 # Create your models here.
@@ -24,3 +25,33 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CertifyingInstitution(models.Model):
+    name = models.CharField(max_length=100)
+    url = models.URLField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("certifying_institution_detail", args=[str(self.id)])
+
+
+class Certificate(models.Model):
+    name = models.CharField(max_length=100)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    profiles = models.ManyToManyField(
+        "Profile", related_name="certificates", blank=True
+    )
+    certifying_institution = models.ForeignKey(
+        CertifyingInstitution,
+        on_delete=models.CASCADE,
+        related_name="certificates",
+    )
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("certificate_detail", args=[str(self.id)])

@@ -2,8 +2,13 @@ from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import action
-from .models import Profile, Project
-from .serializer import ProfileSerializer, ProjectSerializer
+from .models import Certificate, CertifyingInstitution, Profile, Project
+from .serializer import (
+    CertifyingInstitutionSerializer,
+    ProfileSerializer,
+    ProjectSerializer,
+    CertificateSerializer,
+)
 
 # Create your views here.
 
@@ -36,3 +41,13 @@ class ProfileViewSet(ModelViewSet):
 class ProjectViewSet(ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+
+
+class CertifyingInstitutionViewSet(ModelViewSet):
+    queryset = CertifyingInstitution.objects.all()
+    serializer_class = CertifyingInstitutionSerializer
+
+
+class CertificateViewSet(ModelViewSet):
+    queryset = Certificate.objects.all()
+    serializer_class = CertificateSerializer
