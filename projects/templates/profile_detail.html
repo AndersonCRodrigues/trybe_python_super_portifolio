@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de {{ profile.name }}</title>
+</head>
+<body>
+    {% if profile %}
+    <h1>{{ profile.name }}</h1>
+    <p>Github: {{ profile.github }}</p>
+    <p>LinkedIn: {{ profile.linkedin }}</p>
+    <p>{{ profile.bio }}</p>
+
+    <h2>Projetos</h2>
+    <ul>
+        {% for project in projects %}
+        <li>
+            <h3>{{ project.name }}</h3>
+            <p>Palavra-chave: {{ project.keyword }}</p>
+            <p>Habilidade-chave: {{ project.key_skill }}</p>
+            <p>Descrição: {{ project.description }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Certificados</h2>
+    <ul>
+        {% for certificate in certificates %}
+        <li>
+            <p>Nome do Certificado: {{ certificate.name }}</p>
+            <p>Instituição Certificadora: {{ certificate.certifying_institution }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
